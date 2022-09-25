@@ -1,0 +1,19 @@
+<div>
+  <h3><%= @user.name %></h3>
+ <%= image_tag @user.get_profile_image(100,100) %>
+ <% if @user == current_user %>
+ <p><%= link_to "プロフィール編集",edit_user_path(@user.id) %></p>
+ <% end %>
+</div>
+
+<% @postimages.each do |postimage| %>
+<div>
+  <%= link_to postimage_path(postimage.id) do %>
+  <%= image_tag postimage.get_image %>
+  <% end %>
+  <p>投稿ユーザー画像：<%= image_tag postimage.user.get_profile_image(100,100) %></p>
+  <p>ショップ名: <%= postimage.shop_name %></p>
+  <p>説明: <%= postimage.caption %></p>
+  <p>ユーザーネーム: <%= postimage.user.name %></p>
+</div>
+<% end %>
