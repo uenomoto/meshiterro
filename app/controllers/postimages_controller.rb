@@ -21,6 +21,9 @@ class PostimagesController < ApplicationController
   end
   
   def destroy
+    @postimage = Postimage.find(params[:id])
+    @postimage.destroy
+    redirect_to postimages_path
   end
   
     # 投稿データのストロングパラメータ

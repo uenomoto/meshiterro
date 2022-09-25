@@ -5,4 +5,7 @@
   <p>投稿ユーザー画像：<%= image_tag 'sample-author1.jpg' %></p>
   <p>ユーザーネーム：<%= @postimage.user.name %></p>
   <p>投稿日：<%= @postimage.created_at.strftime('%Y/%m/%d') %></p>
+  <% if @postimage.user == current_user %>
+  <%= link_to "削除", postimage_path(@postimage),method: :delete %>
+  <% end %>
 </div>
