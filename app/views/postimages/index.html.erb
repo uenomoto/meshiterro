@@ -1,2 +1,13 @@
-<h1>Postimages#index</h1>
-<p>Find me in app/views/postimages/index.html.erb</p>
+<% @postimages.each do |postimage| %>
+
+<div>
+  <%= link_to postimage_path(postimage.id) do %>
+  <%= image_tag postimage.get_image %>
+  <% end %>
+  <p>投稿ユーザー画像: <%= image_tag 'sample-author1.jpg' %></p>
+  <p>ショップ名：<%= postimage.shop_name %></p>
+  <p>説明：<%= postimage.caption %></p>
+  <p>ユーザーネーム：<%= postimage.user.name %></p>
+</div>
+
+<% end %>

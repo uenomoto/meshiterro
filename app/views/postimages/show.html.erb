@@ -1,2 +1,8 @@
-<h1>Postimages#show</h1>
-<p>Find me in app/views/postimages/show.html.erb</p>
+<div>
+  <%= image_tag @postimage.get_image %>
+  <p>ショップ名：<%= @postimage.shop_name %></p>
+  <p>説明：<%= @postimage.caption %></p>
+  <p>投稿ユーザー画像：<%= image_tag 'sample-author1.jpg' %></p>
+  <p>ユーザーネーム：<%= @postimage.user.name %></p>
+  <p>投稿日：<%= @postimage.created_at.strftime('%Y/%m/%d') %></p>
+</div>
