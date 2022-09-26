@@ -2,10 +2,30 @@
   <%= image_tag @postimage.get_image %>
   <p>ショップ名：<%= @postimage.shop_name %></p>
   <p>説明：<%= @postimage.caption %></p>
-  <p>投稿ユーザー画像：<%= image_tag 'sample-author1.jpg' %></p>
+  <p>投稿ユーザー画像：<%= image_tag @postimage.user.get_profile_image(100,100) %></p>
   <p>ユーザーネーム：<%= @postimage.user.name %></p>
   <p>投稿日：<%= @postimage.created_at.strftime('%Y/%m/%d') %></p>
   <% if @postimage.user == current_user %>
   <%= link_to "削除", postimage_path(@postimage),method: :delete %>
+  <% end %>
+</div>
+
+<div>
+  <p>コメント件数：<%= @postimage.post_comments.count %></p>
+  <% @postimage.post_comments.each do |post_comment| %>
+    <p><%= image_tag post_comment.user.get_profile_image(100,100) %></p>
+    <%= post_comment.user.name %>
+    <%= post_comment.created_at.strftime('%Y/%m/%d') %><%= post_comment.comment %>
+    <% if post_comment.user == current_user %>
+    <%= link_to "削除",postimage_post_comment_path(post_comment.postimage, post_comment),method: :delete %>
+    <% end %>
+    
+  <% end %>
+</div>
+
+<div>
+  <%= form_with model: [@postimage, @post_comment] do |f| %>
+    <%= f.text_area :comment, rows: '5', placeholder: "コメントをここに" %>
+    <%= f.submit "送信する" %>
   <% end %>
 </div>
