@@ -8,6 +8,21 @@
   <% if @postimage.user == current_user %>
   <%= link_to "削除", postimage_path(@postimage),method: :delete %>
   <% end %>
+  <% if @postimage.favorited_by?(current_user) %>
+  
+    <p>
+    <%= link_to postimage_favorites_path(@postimage), method: :delete do %>
+    ♥<%= @postimage.favorites.count %> いいね
+    <% end %>
+    </p>
+    <% else %>
+    <p>
+    <%= link_to postimage_favorites_path(@postimage), method: :post do %>
+    ♡<%= @postimage.favorites.count %> いいね
+  <% end %>
+    </p>
+  <% end %>
+  
 </div>
 
 <div>
