@@ -1,15 +1,28 @@
+<div class="card-list-container py-5">
 <% @postimages.each do |postimage| %>
 
-<div>
+<div class="card w-50 mx-auto mt-4 shadow-lg">
   <%= link_to postimage_path(postimage.id) do %>
-  <%= image_tag postimage.get_image %>
+  <%= image_tag postimage.get_image, class:"card-img-top";%>
   <% end %>
-  <p>投稿ユーザー画像: <%= image_tag postimage.user.get_profile_image(100,100) %></p>
-  <p>ショップ名：<%= postimage.shop_name %></p>
-  <p>説明：<%= postimage.caption %></p>
-  <p>ユーザーネーム：<%= postimage.user.name %></p>
-  <p><%= link_to "#{postimage.post_comments.count} コメント", postimage_path(postimage.id) %></p>
+  <div class="card-body">
+   <div class="row">
+    <div class="col-2">
+      <%= image_tag postimage.user.get_profile_image(100,100), class:"mt-3 rounded-circle"; %>
+    </div>
+    <div class="col-10">
+      <p class="card-title">
+   <%= link_to(postimage_path(postimage.id), class:"text-dark") do %>
+   <strong><i class="far fa-flag"></i><span> <%= postimage.shop_name %></span></strong>
+   <% end %>
+   </p>
+  <p class="card-text">説明：<%= postimage.caption %></p>
+   <span><i class="fas fa-user"></i> By <%= postimage.user.name %> ｜ </span>
+   <span><%= link_to "#{postimage.post_comments.count} コメント", postimage_path(postimage.id), class:"text-dark" %></span>
+    </div>
+   </div>
+  </div>
 </div>
-
 <% end %>
 <%= paginate @postimages %>
+</div>
