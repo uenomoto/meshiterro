@@ -1,9 +1,14 @@
-<div>
-  <h3><%= @user.name %></h3>
- <%= image_tag @user.get_profile_image(100,100) %>
+<div class="profile-container w-75 d-flex mx-auto justify-content-around align-items-center border-bottom py-5">
+  
+ <%= image_tag @user.get_profile_image(100,100), class: "attachment user profile_image rounded-circle fallback" %>
+ 
+ <h5 class="profile-name display-4"><%= @user.name %></h5>
+ 
+ <div class="mt-auto">
  <% if @user == current_user %>
- <p><%= link_to "プロフィール編集",edit_user_path(@user.id) %></p>
+ <p><%= link_to "プロフィール編集",edit_user_path(@user.id), class: "text-dark" %></p>
  <% end %>
+ </div>
 </div>
 
 <%= render 'postimages/list',postiamges: @postimages %>
